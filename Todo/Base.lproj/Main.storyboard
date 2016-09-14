@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--First View Controller-->
+        <!--Pending View Controller-->
         <scene sceneID="VUy-fP-6oR">
             <objects>
-                <tableViewController id="31U-P8-8yD" customClass="FirstViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="31U-P8-8yD" customClass="PendingViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CZh-hD-RA0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,10 +72,10 @@
             </objects>
             <point key="canvasLocation" x="838" y="-603"/>
         </scene>
-        <!--First View Controller-->
+        <!--Done View Controller-->
         <scene sceneID="OOo-1Y-DbR">
             <objects>
-                <tableViewController id="WMf-KI-CwX" customClass="FirstViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WMf-KI-CwX" customClass="DoneViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iuL-dL-1cw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -25,32 +25,6 @@ class BaseController: UITableViewController, NSFetchedResultsControllerDelegate 
         self.managedObjectContext = appDelegate.managedObjectContext
     }
     
-
-    
-    func nextId(managedObjectContext: NSManagedObjectContext) -> NSNumber {
-        let entityName = "Data"
-        let request = NSFetchRequest(entityName: entityName)
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        do {
-            let fetchResults = try managedObjectContext.executeFetchRequest(request)
-            
-            //check if already exists
-            if (fetchResults.count>0)
-            {
-                let lastObject:Data = fetchResults.last as! Data
-                return NSNumber(integer: lastObject.id!.integerValue + 1)
-            }
-            return 0
-            
-        } catch let error as NSError {
-            
-            print("Fetch failed: \(error.localizedDescription)")
-            
-        }
-        return 0
-    }
-    
     // MARK: - Table View
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
