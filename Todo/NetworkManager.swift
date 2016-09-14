@@ -62,40 +62,6 @@ public class NetworkManager: NSObject {
                     
                     let array:NSArray = convertedJsonIntoDict["data"] as! NSArray
                     completionHandler(array, error)
-//                    let context = self.fetchedResultsController.managedObjectContext
-//                    
-//                    array.enumerateObjectsUsingBlock({ object, index, stop in
-//                        let dict = object as! NSDictionary // `as!` in Swift 1.2
-//                        
-//                        let entityName = "Data"
-//                        let request = NSFetchRequest(entityName: entityName)
-//                        let predicate = NSPredicate(format: "id == %d", (dict["id"]?.intValue)!)
-//                        request.predicate = predicate
-//                        
-//                        do {
-//                            let fetchResults = try context.executeFetchRequest(request)
-//                            
-//                            //check if already exists
-//                            if (fetchResults.count==0)
-//                            {
-//                                let newDataObject =  Data(managedObjectContext:context, inDict: dict as! Dictionary<String, AnyObject>)
-//                                print (newDataObject)
-//                            }
-//                        } catch let error as NSError {
-//                            
-//                            print("Fetch failed: \(error.localizedDescription)")
-//                            
-//                        }
-//                        
-//                    })
-//                    
-//                    do {
-//                        try context.save()
-//                    } catch {
-//                        //print("Unresolved error \(error), \(error.userInfo)")
-//                        abort()
-//                    }
-                    
                     
                 }
                 
