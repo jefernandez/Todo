@@ -16,13 +16,17 @@ import CoreData
 class BaseController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var managedObjectContext: NSManagedObjectContext? = nil
-    
+    var timer = NSTimer()
     var pState:NSNumber = 0
+    var deleting = false
+    var button = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
+        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
     
     // MARK: - Table View
@@ -56,12 +60,73 @@ class BaseController: UITableViewController, NSFetchedResultsControllerDelegate 
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+
                 //print("Unresolved error \(error), \(error.userInfo)")
                 abort()
             }
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if !deleting
+        {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            
+            
+            deleting = true
+            button = UIButton(frame: (cell?.frame)!)
+            button.backgroundColor = .redColor()
+            button.setTitle("Cancel", forState: .Normal)
+            button.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+            button.alpha = 0
+            self.view.addSubview(button)
+        
+            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+                self.button.alpha = 1
+                }, completion: { finished in
+                    self.timer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: #selector(BaseController.timerAction(_:)), userInfo:["indexPath":indexPath], repeats: false)
+            })
+        }
+    }
+    
+
+    func timerAction(timer:NSTimer) {
+        let userInfo = timer.userInfo as! Dictionary<String, AnyObject>
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+            self.button.alpha = 0
+            }, completion: { finished in
+                self.deleting=false
+                self.button.removeFromSuperview()
+                
+                let context = self.fetchedResultsController.managedObjectContext
+                let object = self.fetchedResultsController.objectAtIndexPath(userInfo["indexPath"] as! NSIndexPath) as! Data
+                
+                if object.state == 1
+                {
+                    object.state = 0
+                }
+                else
+                {
+                    object.state = 1
+                }
+                do {
+                    try context.save()
+                } catch {
+                    
+                    //print("Unresolved error \(error), \(error.userInfo)")
+                    abort()
+                }
+                
+        })
+    }
+    
+    func buttonAction(sender: UIButton!) {
+
+        timer.invalidate()
+        deleting=false
+        button.removeFromSuperview()
     }
     
     func configureCell(cell: UITableViewCell, withObject object: NSManagedObject) {
@@ -92,17 +157,13 @@ class BaseController: UITableViewController, NSFetchedResultsControllerDelegate 
         let predicate = NSPredicate(format: "state == %d", pState.integerValue)
         fetchRequest.predicate = predicate
         
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
         do {
             try _fetchedResultsController!.performFetch()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             //print("Unresolved error \(error), \(error.userInfo)")
             abort()
         }

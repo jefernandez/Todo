@@ -20,7 +20,7 @@ class PendingViewController: BaseController {
         
         self.getTodoList()
         
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
@@ -99,7 +99,7 @@ class PendingViewController: BaseController {
         let alert = UIAlertController(title: "New TODO object", message: "Enter a name", preferredStyle: .Alert)
         
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-//            textField.text = "Some default text."
+
         })
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in

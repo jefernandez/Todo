@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Pending View Controller-->
+        <!--Pending-->
         <scene sceneID="VUy-fP-6oR">
             <objects>
                 <tableViewController id="31U-P8-8yD" customClass="PendingViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,7 +28,7 @@
                             <outlet property="delegate" destination="31U-P8-8yD" id="hET-a5-OiM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hhs-4H-UC9"/>
+                    <navigationItem key="navigationItem" title="Pending" id="hhs-4H-UC9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONh-FR-on7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -72,7 +72,7 @@
             </objects>
             <point key="canvasLocation" x="838" y="-603"/>
         </scene>
-        <!--Done View Controller-->
+        <!--Done-->
         <scene sceneID="OOo-1Y-DbR">
             <objects>
                 <tableViewController id="WMf-KI-CwX" customClass="DoneViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,7 +95,7 @@
                             <outlet property="delegate" destination="WMf-KI-CwX" id="Can-1C-Jn9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="5vB-hd-yZg"/>
+                    <navigationItem key="navigationItem" title="Done" id="5vB-hd-yZg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoX-UA-dX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
